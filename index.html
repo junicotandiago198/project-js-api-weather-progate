@@ -119,6 +119,36 @@
 
         currentWeatherDiv.innerHTML = element;
       };
+
+      // fungsi untuk pekiraan cuaca kedepan
+      const displayWeatherForecast = (weatherData) => {
+        const weatherForecastDiv = document.getElementById('weather-forecast');
+        const forecast = weatherData.forecast.forecastday;
+
+        let element = '<h2>Weather Forecast</h2>';
+
+        for (let i = 0; i < forecast.length; i++) {
+          const forecastData = {
+            date: forecast[i].date,
+            condition: forecast[i].day.condition.text,
+            conditionImage: forecast[i].day.condition.icon,
+            temperature: forecast[i].day.avgtemp_c,
+            humidity: forecast[i].day.avghumidity,
+          };
+
+          element += `
+      <div class="weather-container">
+        <h3>${forecastData.date}</h3>
+        <p>${forecastData.condition}</p>
+        <img src="https:${forecastData.conditionImage}" class="weather-image">
+        <p>Average Temperature: ${forecastData.temperature}℃</p>
+        <p>Average Humidity: ${forecastData.humidity}%</p>
+      </div>
+    `;
+        }
+
+        weatherForecastDiv.innerHTML = element;
+      };
     </script>
   </body>
 </html>
